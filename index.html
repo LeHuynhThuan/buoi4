@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="dashboard-wrapper">
+
+    <!-- HEADER -->
+    <header class="dashboard-header">
+        <div class="header-left">
+            <div class="logo-icon">
+                <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                    <rect width="32" height="32" rx="8" fill="#6C63FF"/>
+                    <path d="M8 16L13 21L24 10" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <div>
+                <h1 class="header-title">Product Dashboard</h1>
+                <p class="header-sub">Quản lý danh sách sản phẩm</p>
+            </div>
+        </div>
+        <div class="header-stats">
+            <div class="stat-card">
+                <span class="stat-label">Tổng sản phẩm</span>
+                <span class="stat-value" id="totalProducts">0</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-label">Hiển thị</span>
+                <span class="stat-value" id="showingCount">0</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- TOOLBAR -->
+    <div class="toolbar">
+        <div class="toolbar-left">
+            <!-- Search -->
+            <div class="search-container">
+                <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+                </svg>
+                <input type="text" id="searchInput" class="search-input" placeholder="Tìm kiếm theo tên sản phẩm...">
+                <button class="clear-search" id="clearSearch" title="Xóa tìm kiếm">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <path d="M18 6 6 18M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div class="toolbar-right">
+            <!-- Items per page -->
+            <div class="per-page-container">
+                <label class="per-page-label">Hiển thị:</label>
+                <div class="per-page-buttons">
+                    <button class="per-page-btn active" data-limit="5">5</button>
+                    <button class="per-page-btn" data-limit="10">10</button>
+                    <button class="per-page-btn" data-limit="20">20</button>
+                </div>
+                <label class="per-page-label">mỗi trang</label>
+            </div>
+        </div>
+    </div>
+
+    <!-- TABLE CONTAINER -->
+    <div class="table-container">
+        <table id="productTable">
+            <thead>
+                <tr>
+                    <th class="col-no">#</th>
+                    <th class="col-image">Hình ảnh</th>
+                    <th class="col-title sortable" data-sort="title">
+                        <span class="th-content">
+                            Tên Sản Phẩm
+                            <span class="sort-icons">
+                                <svg class="sort-asc" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+                                <svg class="sort-desc" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+                            </span>
+                        </span>
+                    </th>
+                    <th class="col-desc">Mô tả</th>
+                    <th class="col-price sortable" data-sort="price">
+                        <span class="th-content">
+                            Giá
+                            <span class="sort-icons">
+                                <svg class="sort-asc" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+                                <svg class="sort-desc" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+                            </span>
+                        </span>
+                    </th>
+                    <th class="col-category">Danh mục</th>
+                </tr>
+            </thead>
+            <tbody id="productBody">
+                <tr>
+                    <td colspan="6" class="loading-cell">
+                        <div class="loader">
+                            <div class="loader-ring"></div>
+                            <span>Đang tải dữ liệu...</span>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- PAGINATION -->
+    <div class="pagination-wrapper">
+        <div class="pagination-info">
+            Hiển thị <span id="paginationFrom">0</span> - <span id="paginationTo">0</span> trên tổng <span id="paginationTotal">0</span> sản phẩm
+        </div>
+        <div class="pagination" id="pagination"></div>
+    </div>
+
+</div>
+
+<!-- DESCRIPTION TOOLTIP / POPUP -->
+<div class="desc-popup" id="descPopup">
+    <div class="desc-popup-arrow"></div>
+    <div class="desc-popup-content">
+        <div class="desc-popup-title">Mô tả sản phẩm</div>
+        <p id="descPopupText"></p>
+    </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
